@@ -24,6 +24,7 @@ $env.config.buffer_editor = "nvim"
 $env.config.show_banner = false 
 $env.config.table.mode = "rounded"
 $env.config.edit_mode = 'vi'
+alias chez = chezmoi 
 
 $env.LS_COLORS = (vivid generate snazzy)
 mkdir ($nu.data-dir | path join "vendor/autoload")
