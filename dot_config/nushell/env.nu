@@ -23,7 +23,9 @@ $env.PATH = ($env.PATH | prepend '~/workspace/cres/workspace/bin/')
 gpgconf --launch gpg-agent
 
 cat /etc/resolv.conf | grep nameserver | split row " " | last | load-env {
-  http_proxy: $"http://($in):16191", https_proxy: $"http://($in):16191"
+  http_proxy: $"http://($in):16191", 
+  https_proxy: $"http://($in):16191",
+  all_proxy: $"socks5://($in):16191",
 }
 
 const NU_PLUGIN_DIRS = [
