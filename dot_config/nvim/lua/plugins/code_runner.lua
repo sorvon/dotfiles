@@ -71,7 +71,7 @@ return {
         -- 使用 vim.fn.matchstr 进行正则匹配（使用 Vim 正则语法）
         local matched_text = vim.fn.matchstr(content, "\\vimport xlwings")
         if matched_text == "" then
-          return "python -u"
+          return "uv run"
         else
           return "python.exe -u"
         end
