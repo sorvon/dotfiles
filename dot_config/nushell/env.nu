@@ -22,11 +22,21 @@ $env.GPG_TTY = (tty)
 $env.PATH = ($env.PATH | prepend '~/workspace/cres/workspace/bin/')
 gpgconf --launch gpg-agent
 
-cat /etc/resolv.conf | grep nameserver | split row " " | last | load-env {
-  http_proxy: $"http://($in):16191", 
-  https_proxy: $"http://($in):16191",
-  all_proxy: $"socks5://($in):16191",
-}
+cat /etc/resolv.conf | grep nameserver | split row " " | last | do --env {
+  if $in != "10.255.255.254" { 
+    load-env {
+      http_proxy: $"http://($in):16191", 
+      https_proxy: $"http://($in):16191",
+      all_proxy: $"socks5://($in):16191",
+    }
+  } else {
+    load-env {
+      http_proxy: "http://127.0.0.1:16191",
+      https_proxy: "http://127.0.0.1:16191",
+      all_proxy: "socks5://127.0.0.1:16191",
+    }
+  }
+} 
 
 const NU_PLUGIN_DIRS = [
   ($nu.current-exe | path dirname)

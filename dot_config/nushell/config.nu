@@ -21,6 +21,7 @@ $env.config.show_banner = false
 $env.config.table.mode = "rounded"
 $env.config.edit_mode = 'vi'
 alias chez = chezmoi 
+alias sudo = sudo -E
 
 $env.LS_COLORS = (vivid generate snazzy)
 mkdir ($nu.data-dir | path join "vendor/autoload")
@@ -43,6 +44,6 @@ def --env y [...args] {
 }
 
 def --wrapped mvn8 [...args] {
-  $env.JAVA_HOME = "/usr/lib/jvm/java-8-openjdk-amd64"
+  $env.JAVA_HOME = "/usr/lib/jvm/java-8-openjdk"
   mvn ...$args
 }
