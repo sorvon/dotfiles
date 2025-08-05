@@ -12,23 +12,21 @@
 --     ["*"] = { "nvim-clip", "get" }
 --   },
 -- }
-vim.g.clipboard = {
-  name = 'osc52',
-  copy = {
-    ["+"] = require('vim.ui.clipboard.osc52').copy('+'),
-    ["*"] = require('vim.ui.clipboard.osc52').copy('+'),
-  },
-  paste = {
-    ["+"] = 'wl-paste',
-    ["*"] = 'wl-paste',
-  },
-}
+-- vim.g.clipboard = {
+--   name = 'osc52',
+--   copy = {
+--     ["+"] = require('vim.ui.clipboard.osc52').copy('+'),
+--     ["*"] = require('vim.ui.clipboard.osc52').copy('+'),
+--   },
+--   paste = {
+--     ["+"] = { "nvim-clip", "get" },
+--     ["*"] = { "nvim-clip", "get" }
+--   },
+-- }
 
--- vim.g.clipboard = "win32yank"
--- vim.g.clipboard = "osc52"
--- vim.g.clipboard = "wl-copy"
+vim.g.clipboard = "win32yank"
 vim.g.mkdp_open_to_the_world = 1
 vim.g.autoformat = false
 vim.opt.fileencodings = "ucs-bom,utf-8,gbk,default,latin1"
-vim.opt.textwidth = 10000
+vim.opt.textwidth = 1000
 vim.opt.smartindent = true
