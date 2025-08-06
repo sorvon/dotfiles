@@ -45,3 +45,18 @@ font-style = "Medium"
 clipboard-read = allow
 clipboard-write = allow
 command = TERM=xterm-256color /usr/bin/bash -l
+clipboard-trim-trailing-spaces = true
+app-notifications = no-clipboard-copy
+clipboard-paste-protection = false
+gtk-titlebar-hide-when-maximized = true
+
+# keybind
+keybind = alt+ctrl+shift+plus=equalize_splits
+keybind = alt+ctrl+shift+up=resize_split:up,10
+keybind = alt+ctrl+shift+down=resize_split:down,10
+keybind = alt+ctrl+shift+left=resize_split:left,10
+keybind = alt+ctrl+shift+right=resize_split:right,10
+keybind = alt+ctrl+left_bracket=goto_split:previous
+keybind = alt+ctrl+right_bracket=goto_split:next
+keybind = performable:unconsumed:ctrl+d=scroll_page_fractional:0.5
+keybind = performable:unconsumed:ctrl+u=scroll_page_fractional:-0.5
