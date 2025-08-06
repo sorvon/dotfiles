@@ -22,8 +22,8 @@ return {
   {
     "chrisgrieser/nvim-rip-substitute",
     -- 建议添加 event 或 cmd 触发加载
-    -- event = "VeryLazy",
-    -- cmd = "RipSubstitute",
+    event = "VeryLazy",
+    cmd = "RipSubstitute",
     keys = {
       -- 将 g/ 映射到 Normal 和 Visual 模式下启动替换
       {
@@ -36,17 +36,13 @@ return {
       },
     },
   },
-  -- {
-  --   "sphamba/smear-cursor.nvim",
-  --   opts = {
-  --     -- hide_target_hack = true,
-  --     -- never_draw_over_target = true,
-  --     cursor_color = "#d3cdc3",
-  --     transparent_bg_fallback_color = "#d3cdc3",
-  --     never_draw_over_target = false,
-  --     hide_target_hack = false,
-  --   },
-  -- },
+  {
+    "sphamba/smear-cursor.nvim",
+    opts = {
+      never_draw_over_target = false,
+      hide_target_hack = false,
+    },
+  },
   {
     "folke/tokyonight.nvim",
     opts = {
@@ -82,7 +78,6 @@ return {
           if cmp.visible() then
             -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
             cmp.select_next_item()
-            -- cmp.confirm({ select = true })
           elseif vim.snippet.active({ direction = 1 }) then
             vim.schedule(function()
               vim.snippet.jump(1)
@@ -124,8 +119,6 @@ return {
       },
       formatters_by_ft = {
         -- nu = { "nufmt" },
-        -- xml = { "xmlformatter" },
-        -- xml = { "prettier_xml" },
       },
     },
   },
