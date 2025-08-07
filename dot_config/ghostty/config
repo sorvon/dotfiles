@@ -58,5 +58,5 @@ keybind = alt+ctrl+shift+left=resize_split:left,10
 keybind = alt+ctrl+shift+right=resize_split:right,10
 keybind = alt+ctrl+left_bracket=goto_split:previous
 keybind = alt+ctrl+right_bracket=goto_split:next
-keybind = performable:unconsumed:ctrl+d=scroll_page_fractional:0.5
-keybind = performable:unconsumed:ctrl+u=scroll_page_fractional:-0.5
+keybind = performable:alt+d=scroll_page_fractional:0.5
+keybind = performable:alt+u=scroll_page_fractional:-0.5
