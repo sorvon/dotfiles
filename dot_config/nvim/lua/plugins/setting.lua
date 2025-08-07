@@ -39,8 +39,11 @@ return {
   {
     "sphamba/smear-cursor.nvim",
     opts = {
-      never_draw_over_target = false,
-      hide_target_hack = false,
+      never_draw_over_target = true,
+      hide_target_hack = true,
+      time_interval = 7,
+      min_horizontal_distance_smear = 3,
+      min_vertical_distance_smear = 2,
     },
   },
   {
@@ -88,7 +91,7 @@ return {
             fallback()
           end
         end, { "i", "s", "n" }),
-        ["<A-Tab>"] = cmp.mapping(function(fallback)
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           elseif vim.snippet.active({ direction = -1 }) then
@@ -173,6 +176,15 @@ return {
             ["<C-h>"] = require("telescope.actions").to_fuzzy_refine, -- 内容搜索过滤
           },
         },
+      },
+    },
+  },
+  {
+    "yanky.nvim",
+    opts = {
+      ring = {
+        update_register_on_cycle = true,
+        permanent_wrapper = require("yanky.wrappers").remove_carriage_return,
       },
     },
   },
