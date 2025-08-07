@@ -24,7 +24,7 @@ run = "cd /mnt/d/dyhtool/wsl/"
 desc = "Cd to /mnt/d/dyhtool/wsl/"
 
 [[mgr.prepend_keymap]]
-on = ["m"]
+on = ["b"]
 run = "plugin bookmarks save"
 desc = "Save current position as a bookmark"
 
@@ -34,12 +34,12 @@ run = "plugin bookmarks jump"
 desc = "Jump to a bookmark"
 
 [[mgr.prepend_keymap]]
-on = ["b", "d"]
+on = ["B", "d"]
 run = "plugin bookmarks delete"
 desc = "Delete a bookmark"
 
 [[mgr.prepend_keymap]]
-on = ["b", "D"]
+on = ["B", "D"]
 run = "plugin bookmarks delete_all"
 desc = "Delete all bookmarks"
 
