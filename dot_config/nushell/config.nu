@@ -26,6 +26,7 @@ alias sudo = sudo -E
 $env.LS_COLORS = (vivid generate snazzy)
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+zoxide init nushell | save -f ($nu.data-dir | path join "vendor/autoload/zoxide.nu")
 
 $nu.user-autoload-dirs | each {mkdir $in}
 const venv_list = [".venv/bin/activate.nu", "venv/bin/activate.nu"]
