@@ -5,13 +5,23 @@ desc = "win_start"
 
 [[mgr.prepend_keymap]]
 on = ["T", "c"]
-run = 'shell --block "sudo tar -czf \"$0.tar.gz\" \"$0\""'
+run = 'shell --block "tar --zstd -cPf \"$0.tar.zst\" \"$0\""'
 desc = "tar -czf"
 
 [[mgr.prepend_keymap]]
 on = ["T", "x"]
-run = 'shell --block "sudo tar -xzf \"$0\""'
+run = 'shell --block "tar --zstd -xPf \"$0\""'
 desc = "tar -xzf"
+
+[[mgr.prepend_keymap]]
+on = ["T", "C"]
+run = 'shell --block "sudo tar --zstd -cPf \"$0.tar.zst\" \"$0\""'
+desc = "sudo tar -czf"
+
+[[mgr.prepend_keymap]]
+on = ["T", "X"]
+run = 'shell --block "sudo tar --zstd -xPf \"$0\""'
+desc = "sudo tar -xzf"
 
 [[mgr.prepend_keymap]]
 on   = [ "c", "m" ]
