@@ -20,6 +20,7 @@
 $env.EDITOR = "nvim"
 $env.GPG_TTY = (tty)
 $env.PATH = ($env.PATH | prepend '~/workspace/cres/workspace/bin/')
+$env.MANPAGER = "nvim +Man!"
 gpgconf --launch gpg-agent
 
 cat /etc/resolv.conf | grep nameserver | split row " " | last | do --env {
