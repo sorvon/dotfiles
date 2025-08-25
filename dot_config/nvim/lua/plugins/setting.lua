@@ -47,9 +47,16 @@ return {
     },
   },
   {
-    "folke/tokyonight.nvim",
+    "tokyonight.nvim",
     opts = {
       style = "night",
+      on_colors = function(colors)
+        colors.comment = colors.dark5
+      end,
+      on_highlights = function(hl, c)
+        hl.LineNrAbove = { fg = c.terminal.white }
+        hl.LineNrBelow = { fg = c.terminal.white }
+      end,
       transparent = true,
       styles = {
         sidebars = "transparent",
