@@ -258,11 +258,11 @@ bindsym $mod+c exec clipman pick -t wofi
 
 mode "mod_switch" {
     set $$mod Mod1
-    bindsym $mod+Control+Shift+U mode "default"
-    bindsym $mod+grave mode "default"
+    bindsym $mod+Control+Shift+U mode "default"; exec cat /dev/shm/nest-notify | xargs -I {} notify-send --urgency=critical 嵌套模式 "Disable" -r {} -t 1000
+    bindsym $mod+grave mode "default"; exec cat /dev/shm/nest-notify | xargs -I {} notify-send --urgency=critical 嵌套模式 "Disable" -r {} -t 1000
     bindsym $mod+Control+Shift+R exec nu -c 'grimshot save screen - | qrtool decode | do { echo $in | wl-copy; notify-send "copy success" $in -t 3000}'
 }
-bindsym $mod+Control+Shift+L mode "mod_switch"
-bindsym $mod+grave mode "mod_switch"
+bindsym $mod+Control+Shift+L mode "mod_switch"; exec notify-send --urgency=critical 嵌套模式 "Enable" -t 0 -p > /dev/shm/nest-notify
+bindsym $mod+grave mode "mod_switch"; exec notify-send --urgency=critical 嵌套模式 "Enable" -t 0 -p > /dev/shm/nest-notify
 
 include /etc/sway/config.d/*
