@@ -5,5 +5,5 @@
 vim.g.mkdp_open_to_the_world = 1
 vim.g.autoformat = false
 vim.opt.fileencodings = "ucs-bom,utf-8,gbk,default,latin1"
-vim.opt.textwidth = 1000
+vim.opt.textwidth = 300
 vim.opt.smartindent = true

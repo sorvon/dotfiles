@@ -30,7 +30,7 @@ return {
               format = {
                 enabled = true,
                 insertSpaces = true,
-                maxLineWidth = 1000,
+                maxLineWidth = 300,
                 splitAttributes = "preserve",
                 preservedNewlines = 1,
                 preserveAttributeLineBreaks = true,

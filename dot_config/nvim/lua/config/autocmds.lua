@@ -9,7 +9,7 @@
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = vim.api.nvim_create_augroup("dyh", { clear = true }),
   callback = function()
-    if vim.bo.fileencoding == "" and vim.api.nvim_buf_get_name(0) ~= "" then
+    if (vim.bo.fileencoding == "" or vim.bo.fileencoding =="latin1") and vim.api.nvim_buf_get_name(0) ~= "" then
       vim.cmd("edit ++enc=cp936")
     end
   end
