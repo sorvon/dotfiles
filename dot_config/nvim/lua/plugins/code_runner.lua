@@ -81,6 +81,9 @@ return {
       typescript = "deno run",
       typescriptreact = "yarn dev$end",
       rust = "cd $dir ; rustc $fileName ; $dir$fileNameWithoutExt",
+      http = function ()
+        require('kulala').run()
+      end
     },
     -- project_path = vim.fn.expand("~/.config/nvim/project_manager.json"),
   },
