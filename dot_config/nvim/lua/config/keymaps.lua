@@ -7,6 +7,7 @@ vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], { desc = "wincmd h" })
 vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], { desc = "wincmd j" })
 vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], { desc = "wincmd k" })
 vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], { desc = "wincmd l" })
+vim.keymap.set("n", "<c-/>", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
 
 vim.keymap.set({ "n", "t", "i", "v" }, [[<C-\>]], function()
   if (vim.v.count > 0) then
