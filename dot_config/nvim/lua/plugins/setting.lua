@@ -56,6 +56,7 @@ return {
       on_highlights = function(hl, c)
         hl.LineNrAbove = { fg = c.terminal.white }
         hl.LineNrBelow = { fg = c.terminal.white }
+        hl.DiagnosticUnnecessary = { fg = c.dark5 }
       end,
       transparent = true,
       styles = {
@@ -193,6 +194,12 @@ return {
         update_register_on_cycle = true,
         permanent_wrapper = require("yanky.wrappers").remove_carriage_return,
       },
+    },
+  },
+  {
+    "gitsigns.nvim",
+    opts = {
+      max_file_length = 100000,
     },
   },
 }
