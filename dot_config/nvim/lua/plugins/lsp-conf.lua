@@ -4,13 +4,6 @@ return {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
     opts = {
-      capabilities = {
-        workspace = {
-          didChangeConfiguration = {
-            dynamicRegistration = true,
-          },
-        },
-      },
       servers = {
         lemminx = {
           settings = {
@@ -51,4 +44,9 @@ return {
       },
     },
   },
+  {
+      "theHamsta/nvim-dap-virtual-text",
+      enabled = false,
+      opts = {},
+    },
 }
