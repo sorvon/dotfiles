@@ -78,10 +78,6 @@ rules = [
   { mime = "*/javascript", use = [ "edit", "reveal" ] },
   # Empty file
   { mime = "inode/empty", use = [ "edit", "reveal" ] },
-  # excel
-  { name = "*.xls", use = ["win_start"] },
-  { name = "*.xlsx", use = ["win_start"] },
-  { name = "*.xlsm", use = ["win_start"] },
   # Fallback
   { name = "*", use = [ "open", "reveal" ] },
 ]
