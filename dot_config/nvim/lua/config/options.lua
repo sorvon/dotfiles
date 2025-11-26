@@ -7,3 +7,4 @@ vim.g.autoformat = false
 vim.opt.fileencodings = "ucs-bom,utf-8,gbk,default,latin1"
 vim.opt.textwidth = 300
 vim.opt.smartindent = true
+vim.opt.expandtab = true

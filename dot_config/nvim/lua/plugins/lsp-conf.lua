@@ -37,6 +37,10 @@ return {
                   systemId = "/home/dyh/workspace/O45KZH-SECX/sec-server-gateway/o45-sec-common/src/main/resources/META-INF/t2_function.xsd",
                   pattern = "/home/dyh/workspace/O45KZH-SECX/sec-server-gateway/**/*.xml",
                 },
+                {
+                  systemId = vim.env.PWD .. "/o45-ufx-common/src/main/resources/META-INF/t2_function.xsd",
+                  pattern = "**/o45-ufx-starter/**/*.xml",
+                },
               },
             },
           },
@@ -45,8 +49,8 @@ return {
     },
   },
   {
-      "theHamsta/nvim-dap-virtual-text",
-      enabled = false,
-      opts = {},
-    },
+    "theHamsta/nvim-dap-virtual-text",
+    enabled = false,
+    opts = {},
+  },
 }
