@@ -6,7 +6,21 @@
 -- * override the configuration of LazyVim plugins
 return {
   {
-    "echasnovski/mini.surround",
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "catppuccin",
+    },
+  },
+  {
+    "catppuccin",
+    opts = {
+      background = {
+        dark = "macchiato"
+      }
+    },
+  },
+  {
+    "nvim-mini/mini.surround",
     opts = {
       mappings = {
         add = "gsa", -- Add surrounding in Normal and Visual modes
@@ -33,35 +47,6 @@ return {
         end,
         mode = { "n", "x" }, -- n=Normal, x=Visual
         desc = "Rip Substitute (区域/文件替换)",
-      },
-    },
-  },
-  {
-    "sphamba/smear-cursor.nvim",
-    opts = {
-      never_draw_over_target = true,
-      hide_target_hack = true,
-      time_interval = 7,
-      min_horizontal_distance_smear = 3,
-      min_vertical_distance_smear = 2,
-    },
-  },
-  {
-    "tokyonight.nvim",
-    opts = {
-      style = "night",
-      on_colors = function(colors)
-        colors.comment = colors.dark5
-      end,
-      on_highlights = function(hl, c)
-        hl.LineNrAbove = { fg = c.terminal.white }
-        hl.LineNrBelow = { fg = c.terminal.white }
-        hl.DiagnosticUnnecessary = { fg = c.dark5 }
-      end,
-      transparent = true,
-      styles = {
-        sidebars = "transparent",
-        floats = "transparent",
       },
     },
   },
