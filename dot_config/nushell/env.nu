@@ -43,3 +43,8 @@ const NU_PLUGIN_DIRS = [
   ($nu.current-exe | path dirname)
   ...$NU_PLUGIN_DIRS
 ]
+
+# pnpm
+$env.PNPM_HOME = "/home/dyh/.local/share/pnpm"
+$env.PATH = ($env.PATH | split row (char esep) | prepend $env.PNPM_HOME )
+# pnpm end
