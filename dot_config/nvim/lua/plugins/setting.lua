@@ -155,10 +155,7 @@ return {
   },
   {
     "mistweaverco/kulala.nvim",
-    keys = {
-      { "<leader>Re", "<cmd>lua require('kulala').set_selected_env()<cr>", desc = "Select env", ft = "http" },
-    },
-    opts = { lsp = { formatter = true } },
+    tag = "v5.3.2",
   },
   {
     "nvim-telescope/telescope.nvim",
