@@ -129,12 +129,6 @@ return {
     },
   },
   {
-    "snacks.nvim",
-    opts = {
-      bigfile = { enabled = true, line_length = nil },
-    },
-  },
-  {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
       table.insert(opts.sections.lualine_y, { "encoding" })
