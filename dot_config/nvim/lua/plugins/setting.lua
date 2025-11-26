@@ -187,4 +187,11 @@ return {
       max_file_length = 100000,
     },
   },
+  {
+    "bufferline.nvim",
+    keys = {
+      { "<<", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
+      { ">>", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
+    },
+  },
 }
