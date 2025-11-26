@@ -6,6 +6,7 @@ return {
     shell = "nu",
     autochdir = true,
     close_on_exit = false,
+    auto_scroll = false,
     size = function(term)
       if term.direction == "horizontal" then
         return 15
