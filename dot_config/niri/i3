@@ -1,0 +1,16 @@
+set $mod Mod4
+font pango:monospace 12
+floating_modifier $mod
+default_border          pixel 1
+default_floating_border pixel 1
+hide_edge_borders both
+popup_during_fullscreen ignore
+focus_on_window_activation none
+exec_always dbus-update-activation-environment DISPLAY XDG_CURRENT_DESKTOP
+
+# start a terminal
+bindsym Control+Mod1+Shift+f fullscreen toggle
+
+exec --no-startup-id niri
+for_window [class="niri"] fullscreen enable
+no_focus [class="Rustdesk"]

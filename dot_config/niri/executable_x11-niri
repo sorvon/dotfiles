@@ -1,0 +1,11 @@
+#!/usr/bin/env nu
+
+const display = ":1"
+mkdir ~/.local/share/logs/X11
+job spawn { Xorg -noreset +extension GLX +extension RANDR +extension RENDER -logfile ~/.local/share/logs/X11/($display).log -config ~/.config/niri/niri-dummy.conf ($display) }
+sleep 3sec
+$env.DISPLAY = $display
+$env.i3_DISPLAY = $display
+$env.LIBVA_DRIVER_NAME = "d3d12"
+cd
+i3 -c ~/.config/i3/niri
