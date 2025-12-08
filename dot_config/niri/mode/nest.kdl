@@ -1,0 +1,6 @@
+binds {
+    Mod+grave allow-inhibiting=false { spawn-sh "~/.config/niri/script/switch_mode.nu default && niri msg action focus-workspace-previous"; }
+}
+recent-windows {
+    off
+}

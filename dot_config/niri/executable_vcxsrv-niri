@@ -1,0 +1,8 @@
+#!/usr/bin/env nu
+
+const display = ":8"
+$env.DISPLAY = $display
+$env.i3_DISPLAY = $display
+$env.LIBVA_DRIVER_NAME = "d3d12"
+cd
+i3 -c ~/.config/niri/i3

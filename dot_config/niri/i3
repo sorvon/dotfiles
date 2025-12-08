@@ -6,11 +6,21 @@ default_floating_border pixel 1
 hide_edge_borders both
 popup_during_fullscreen ignore
 focus_on_window_activation none
-exec_always dbus-update-activation-environment DISPLAY XDG_CURRENT_DESKTOP
+workspace_auto_back_and_forth yes
 
-# start a terminal
+fake-outputs 1920x1032+0+0,2560x1080+1920+0
+set $ws1 "1"
+set $ws2 "2"
+set $ws_niri "98:niri"
+workspace $ws_niri output fake-1
+
 bindsym Control+Mod1+Shift+f fullscreen toggle
+bindsym Control+Mod1+Shift+r reload
+bindsym Control+Mod1+Shift+1 move workspace to output fake-0
+bindsym Control+Mod1+Shift+2 move workspace to output fake-1
 
 exec --no-startup-id niri
-for_window [class="niri"] fullscreen enable
 no_focus [class="Rustdesk"]
+for_window [class="niri"] fullscreen enable
+for_window [class="niri"] move --no-auto-back-and-forth container to workspace $ws_niri
+
