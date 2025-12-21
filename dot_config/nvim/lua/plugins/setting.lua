@@ -15,8 +15,8 @@ return {
     "catppuccin",
     opts = {
       background = {
-        dark = "macchiato"
-      }
+        dark = "macchiato",
+      },
     },
   },
   {
@@ -126,6 +126,9 @@ return {
     "nmac427/guess-indent.nvim",
     opts = {
       auto_cmd = true,
+      on_tab_options = { -- A table of vim options when tabs are detected
+        ["expandtab"] = true,
+      },
     },
   },
   {
@@ -169,6 +172,10 @@ return {
       ring = {
         update_register_on_cycle = true,
         permanent_wrapper = require("yanky.wrappers").remove_carriage_return,
+      },
+      system_clipboard = {
+        sync_with_ring = true,
+        clipboard_register = "+",
       },
     },
   },
