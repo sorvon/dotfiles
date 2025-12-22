@@ -23,19 +23,21 @@ $env.PATH = ($env.PATH | prepend '~/workspace/cres/workspace/bin/')
 $env.MANPAGER = "nvim +Man!"
 gpgconf --launch gpg-agent
 
+def --env set_proxy [ip: string port: string] {
+  if (nc -z $ip $port | complete | get exit_code) == 0 {
+    load-env {
+      http_proxy: $"http://($ip):($port)", 
+      https_proxy: $"http://($ip):($port)",
+      all_proxy: $"socks5://($ip):($port)",
+    }
+  }
+}
+
 cat /etc/resolv.conf | grep nameserver | split row " " | last | do --env {
-  if $in != "10.255.255.254" { 
-    load-env {
-      http_proxy: $"http://($in):16191", 
-      https_proxy: $"http://($in):16191",
-      all_proxy: $"socks5://($in):16191",
-    }
+  if $in != "10.255.255.254" and $in != "10.26.232.2" { 
+    set_proxy $in 16191
   } else {
-    load-env {
-      http_proxy: "http://127.0.0.1:16191",
-      https_proxy: "http://127.0.0.1:16191",
-      all_proxy: "socks5://127.0.0.1:16191",
-    }
+    set_proxy "127.0.0.1" 16191
   }
 } 
 
