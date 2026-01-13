@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+text=$1
+gbk=$(echo "$text" | iconv -f GBK -t UTF-8)
+if [ $? -eq 0 ]; then
+    text="$gbk"
+fi
+text=$(echo "$text" | base64 -w 0)
+printf "\033]52;c;%s\a" "$text" >/dev/tty

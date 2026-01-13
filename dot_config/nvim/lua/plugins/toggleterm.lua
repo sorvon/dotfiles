@@ -4,7 +4,6 @@ return {
   opts = {
     direction = "float",
     shell = "nu",
-    autochdir = true,
     close_on_exit = false,
     auto_scroll = false,
     size = function(term)

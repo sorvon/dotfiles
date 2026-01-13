@@ -8,4 +8,5 @@ keybinding:
   universal:
     suspendApp: <disabled>
 os:
-  open: "neovide {{filename}} >/dev/null"
+  editPreset: "nvim-remote"
+  copyToClipboardCmd: $HOME/.config/lazygit/osc52 {{text}}
