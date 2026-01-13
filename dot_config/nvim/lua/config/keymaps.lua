@@ -7,8 +7,15 @@ vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], { desc = "wincmd h" })
 vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], { desc = "wincmd j" })
 vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], { desc = "wincmd k" })
 vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], { desc = "wincmd l" })
-vim.keymap.set({ "n", "t" }, "<M-/>", function()
-  Snacks.lazygit({ cwd = LazyVim.root.git() })
+local lazygit = require("toggleterm.terminal").Terminal:new({
+  id = 99,
+  cmd = "lazygit",
+  hidden = true,
+  close_on_exit = true,
+})
+vim.keymap.set({ "n", "t" }, "<A-/>", function()
+  lazygit.dir = LazyVim.root.git()
+  lazygit:toggle()
 end, { desc = "Lazygit (Root Dir)" })
 
 vim.keymap.set({ "n", "t", "i", "v" }, [[<A-\>]], function()
@@ -57,3 +64,4 @@ vim.keymap.set("n", "<leader>fg", function()
     builtin.live_grep()
   end
 end, {})
+
