@@ -190,4 +190,6 @@ return {
       { ">>", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
     },
   },
+  { "mini.pairs", enabled = false },
+  { "sindrets/diffview.nvim" },
 }
