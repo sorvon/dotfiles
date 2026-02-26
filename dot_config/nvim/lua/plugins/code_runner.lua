@@ -8,7 +8,10 @@ return {
     {
       "<leader>rr",
       function()
-        require("code_runner").run_code()
+        vim.cmd("w")
+        vim.defer_fn(function()
+          require("code_runner").run_code()
+        end, 100)
       end,
       desc = "[e]xcute code",
     },
@@ -73,7 +76,7 @@ return {
         if matched_text == "" then
           return "uv run"
         else
-          return "python.exe -u"
+          return "/mnt/c/Users/dingyh54129/AppData/Local/Programs/Python/Python314/python.exe -u"
         end
       end,
       nu = "nu",
@@ -81,9 +84,53 @@ return {
       typescript = "deno run",
       typescriptreact = "yarn dev$end",
       rust = "cd $dir ; rustc $fileName ; $dir$fileNameWithoutExt",
-      http = function ()
-        require('kulala').run()
-      end
+      http = function()
+        require("kulala").run()
+      end,
+      hurl = function()
+        local utils = require("hurl.utils")
+        local http = require("hurl.http_utils")
+        local hurl_runner = require("hurl.lib.hurl_runner")
+        local result = http.find_hurl_entry_positions_in_buffer()
+        if result.current > 0 and result.start_line and result.end_line then
+          utils.log_info("hurl: running request at line " .. result.start_line .. " to " .. result.end_line)
+          local bufnr = vim.api.nvim_get_current_buf()
+          local lines = vim.api.nvim_buf_get_lines(bufnr, result.start_line - 1, result.end_line, false)
+          local filtered_lines = {}
+          for _, line in ipairs(lines) do
+            local cmd = line:match('^#%s*cmd:%s*"([^"]+)"')
+            if cmd then
+              vim.fn.system(cmd)
+            end
+            if not line:match("^%s*#") then
+              table.insert(filtered_lines, line)
+            end
+          end
+          local fname = utils.create_tmp_file(filtered_lines)
+          if not fname then
+            utils.log_warn("hurl: create tmp file failed")
+            utils.notify("hurl: create tmp file failed. Please try again!", vim.log.levels.WARN)
+            return
+          end
+          local opts = {}
+          table.insert(opts, fname)
+          hurl_runner.execute_hurl_cmd(opts)
+          -- Clean up the temporary file after a delay
+          local timeout = 1000
+          vim.defer_fn(function()
+            local success = os.remove(fname)
+            if not success then
+              utils.log_info("hurl: remove file failed " .. fname)
+              utils.notify("hurl: remove file failed", vim.log.levels.WARN)
+            else
+              utils.log_info("hurl: remove file success " .. fname)
+            end
+          end, timeout)
+        else
+          utils.log_info("hurl: not HTTP method found in the current line" .. result.start_line)
+          utils.notify("hurl: no HTTP method found in the current line", vim.log.levels.INFO)
+        end
+      end,
     },
     -- project_path = vim.fn.expand("~/.config/nvim/project_manager.json"),
   },

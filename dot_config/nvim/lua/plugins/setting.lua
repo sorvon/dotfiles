@@ -120,7 +120,9 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "kdl" } },
+    opts = {
+      ensure_installed = { "kdl", "hurl" },
+    },
   },
   {
     "nmac427/guess-indent.nvim",
@@ -149,10 +151,6 @@ return {
       })
       table.insert(opts.sections.lualine_y, { "fileformat" })
     end,
-  },
-  {
-    "mistweaverco/kulala.nvim",
-    tag = "v5.3.2",
   },
   {
     "nvim-telescope/telescope.nvim",
