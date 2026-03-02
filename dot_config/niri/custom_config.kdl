@@ -19,7 +19,7 @@ input {
             layout "us,cn"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
             model "pc105"
-            // rules "xorg"
+            rules "xorg"
 
             // If this section is empty, niri will fetch xkb settings
             // from org.freedesktop.locale1. You can control these using
@@ -295,15 +295,6 @@ animations {
     // slowdown 3.0
 }
 
-// Open the Firefox picture-in-picture player as floating by default.
-window-rule {
-    // This app-id regular expression will work for both:
-    // - host Firefox (app-id is "firefox")
-    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    open-floating true
-}
-
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
@@ -337,6 +328,7 @@ environment {
     INPUT_METHOD "fcitx"
     SDL_IM_MODULE "fcitx"
     GLFW_IM_MODULE "ibus"
+    XDG_CURRENT_DESKTOP "gnome"
 }
 workspace "dev"
 workspace "browser"
@@ -345,30 +337,33 @@ workspace "citrix"
 window-rule {
     match app-id=r#"^firefox$"#
     match app-id=r#"^zen$"#
+    match app-id=r#"^Vivaldi-stable$"#
     open-on-workspace "browser"
 }
 window-rule {
     match app-id=r#"^org.freedesktop.Xwayland$"# title=r#"^Xwayland on :7"#
     match app-id=r#"^Wfica$"#
     open-on-workspace "citrix"
+    open-fullscreen true
 }
 window-rule {
     match app-id=r#"^wechat$"#
+    match app-id=r#"^Xdg-desktop-portal-gtk$"#
+    match app-id=r#"^wechat$"# title=r#"^wechat$"# 
+    match app-id=r#"Vivaldi-stable$"# title="^Vivaldi Settings"
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
 }
-window-rule {
-    match app-id=r#"^wechat$"# title=r#"^wechat$"# 
-    open-focused false
-}
 
-// spawn-at-startup "dbus-update-activation-environment" "WAYLAND_DISPLAY" "DISPLAY" "XDG_CURRENT_DESKTOP"
+spawn-at-startup "dbus-update-activation-environment" "WAYLAND_DISPLAY" "DISPLAY" "XDG_CURRENT_DESKTOP"
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
 spawn-at-startup "foot" "-s"
 spawn-at-startup "fcitx5" "-r"
 spawn-at-startup "vicinae" "server" "--replace"
 spawn-at-startup "foot"
-
-// spawn-sh-at-startup "RUST_LOG=debug /home/dyh/.cargo/bin/linux_clipboard_sync $i3_DISPLAY $WAYLAND_DISPLAY > $HOME/.local/share/logs/linux_clipboard_sync.log 2>&1"
+spawn-at-startup "~/.config/niri/script/switch_mode.nu" "default"
+spawn-sh-at-startup "sleep 3 && setxkbmap -rules xorg"
+spawn-sh-at-startup "~/.local/bin/clipboard-sync"
 
 include "mode/default.kdl"
