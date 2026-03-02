@@ -20,6 +20,22 @@ $env.config.buffer_editor = "nvim"
 $env.config.show_banner = false 
 $env.config.table.mode = "rounded"
 $env.config.edit_mode = 'vi'
+$env.config.keybindings ++= [
+  {
+    name: BackspaceWord
+    modifier: alt
+    keycode: backspace
+    mode: [vi_insert vi_normal emacs]
+    event: { edit: BackspaceWord}
+  }
+  {
+    name: BackspaceWord
+    modifier: control
+    keycode: Char_h
+    mode: [vi_insert vi_normal emacs]
+    event: { edit: BackspaceWord}
+  }
+]
 alias chez = chezmoi 
 alias sudo = sudo -E
 alias ze = do {
