@@ -1,0 +1,18 @@
+patch:
+  __include: rime_ice_suggestion:/
+  key_binder:
+    select_first_character: Begin
+    select_last_character: End
+    bindings:
+      - { when: has_menu, accept: comma, send: Page_Up }
+      - { when: has_menu, accept: period, send: Page_Down }
+      - { when: has_menu, accept: bracketleft, send: Page_Up }
+      - { when: has_menu, accept: bracketright, send: Page_Down }
+      - { when: always, accept: Escape, toggle: ascii_mode }
+  ascii_composer:
+    switch_key:
+      Caps_Lock: clear
+      Shift_L: commit_code
+      Shift_R: commit_code
+      Control_L: clear
+      Control_R: clear

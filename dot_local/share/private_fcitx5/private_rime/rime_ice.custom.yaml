@@ -1,0 +1,6 @@
+patch:
+  switches:
+    - name: ascii_mode
+      reset: 1
+    - name: ascii_punct
+      reset: 1
