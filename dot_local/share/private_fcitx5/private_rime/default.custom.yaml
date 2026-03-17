@@ -8,7 +8,7 @@ patch:
       - { when: has_menu, accept: period, send: Page_Down }
       - { when: has_menu, accept: bracketleft, send: Page_Up }
       - { when: has_menu, accept: bracketright, send: Page_Down }
-      - { when: always, accept: Escape, toggle: ascii_mode }
+      - { when: always, accept: Release+Escape, set_option: ascii_mode }
   ascii_composer:
     switch_key:
       Caps_Lock: clear
