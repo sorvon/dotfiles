@@ -14,5 +14,5 @@ patch:
       Caps_Lock: clear
       Shift_L: commit_code
       Shift_R: commit_code
-      Control_L: ignore
-      Control_R: ignore
+      Control_L: noop
+      Control_R: noop
