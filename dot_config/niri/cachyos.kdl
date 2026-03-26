@@ -17,3 +17,10 @@ binds {
   Print allow-inhibiting=false { spawn-sh "grim -g \"$(slurp)\" - | swappy -f -"; }
   Mod+S allow-inhibiting=false { spawn-sh "grim -g \"$(slurp)\" - | swappy -f -"; }
 }
+input {
+  keyboard {
+    xkb {
+      options "ctrl:nocaps"
+    }
+  }
+}
