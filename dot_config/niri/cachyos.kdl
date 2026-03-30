@@ -8,7 +8,7 @@ include "./cfg/misc.kdl"
 
 spawn-at-startup "solaar" "--window" "hide"
 binds {
-  Mod+Return hotkey-overlay-title="Open Terminal" { spawn "ghostty"; }
+  Mod+Return hotkey-overlay-title="Open Terminal" { spawn "neovide" "--" "-c" "term"; }
   Mod+D hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
   Mod+Shift+H { focus-column-left; }
   Mod+Shift+L { focus-column-right; }
@@ -16,6 +16,11 @@ binds {
   Mod+Shift+J { focus-window-down; }
   Print allow-inhibiting=false { spawn-sh "grim -g \"$(slurp)\" - | swappy -f -"; }
   Mod+S allow-inhibiting=false { spawn-sh "grim -g \"$(slurp)\" - | swappy -f -"; }
+}
+environment {
+    SHELL "nu"
+    XMODIFIERS "@im=fcitx"
+    QT_IM_MODULE "fcitx"
 }
 input {
   keyboard {
