@@ -14,8 +14,8 @@ binds {
   Mod+Shift+L { focus-column-right; }
   Mod+Shift+K { focus-window-up; }
   Mod+Shift+J { focus-window-down; }
-  Print allow-inhibiting=false { spawn-sh "niri msg action screenshot && wl-paste | swappy -f -"; }
-  Mod+S allow-inhibiting=false { spawn-sh "niri msg action screenshot && wl-paste | swappy -f -"; }
+  Print allow-inhibiting=false { spawn-sh "niri msg action screenshot && niri msg --json event-stream | rg -m 1 ScreenshotCaptured && wl-paste | swappy -f -"; }
+  Mod+S allow-inhibiting=false { spawn-sh "niri msg action screenshot && niri msg --json event-stream | rg -m 1 ScreenshotCaptured && wl-paste | swappy -f -"; }
 }
 environment {
     SHELL "nu"
