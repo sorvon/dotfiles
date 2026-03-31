@@ -185,10 +185,11 @@ return {
   },
   {
     "bufferline.nvim",
-    keys = {
-      { "<<", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
-      { ">>", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
-    },
+    enabled = false,
+    -- keys = {
+    --   { "<<", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
+    --   { ">>", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
+    -- },
   },
   { "mini.pairs", enabled = false },
   { "sindrets/diffview.nvim" },
