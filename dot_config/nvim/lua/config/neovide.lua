@@ -1,5 +1,6 @@
 vim.o.guifont = "Maple Mono NF CN:h12"
 vim.g.neovide_scale_factor = 1.0
+vim.g.neovime_no_version_warning = true
 -- 影响性能
 vim.g.neovide_floating_blur = false
 
@@ -25,3 +26,6 @@ end
 vim.keymap.set({ "n", "i", "v" }, "<C-s>", save, { desc = "Save" })
 vim.keymap.set("v", "<C-S-c>", copy, { silent = true, desc = "Copy" })
 vim.keymap.set({ "n", "i", "v", "c", "t" }, "<C-S-v>", paste, { silent = true, desc = "Paste" })
+vim.keymap.set({ "n", "i", "v", "c", "t" }, "<F11>", function()
+  vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
+end, { silent = true, desc = "Paste" })
