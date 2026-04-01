@@ -1,4 +1,4 @@
-{{ if eq .chezmoi.osRelease.id "cachyos"}}
+{{ if eq (get .chezmoi.osRelease "id") "cachyos"}}
 include "./cachyos.kdl"
 {{ else }}
 include "./custom_config.kdl"
