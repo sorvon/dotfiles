@@ -7,6 +7,10 @@ vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], { desc = "wincmd h" })
 vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], { desc = "wincmd j" })
 vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], { desc = "wincmd k" })
 vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], { desc = "wincmd l" })
+vim.keymap.set({ "n", "x", "t", "i" }, "<a-s-q>", function()
+  local curl = require("plenary.curl")
+  curl.post("http://localhost:11457/clipboard/qrcode_show")
+end)
 local lazygit = require("toggleterm.terminal").Terminal:new({
   id = 99,
   cmd = "lazygit",
