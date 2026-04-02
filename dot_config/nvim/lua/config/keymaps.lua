@@ -18,20 +18,20 @@ vim.keymap.set({ "n", "t" }, "<A-/>", function()
   lazygit:toggle()
 end, { desc = "Lazygit (Root Dir)" })
 
-vim.keymap.set({ "n", "t", "i", "v" }, [[<A-\>]], function()
-  if vim.v.count > 0 then
-    vim.cmd([[exe v:count . "ToggleTerm direction=float"]])
-  else
-    vim.cmd([[ToggleTerm direction=float]])
+function scope_toggleterm(direction)
+  return function()
+    local buf_id = vim.api.nvim_get_current_buf()
+    local buf_name = vim.api.nvim_buf_get_name(buf_id)
+    local offset = vim.api.nvim_get_current_tabpage() * 1000 + vim.v.count
+    if string.match(buf_name, "^term://.*#toggleterm#%d+$") then
+      vim.cmd(string.format("ToggleTerm direction=%s", direction))
+    else
+      vim.cmd(string.format('exe %d . "ToggleTerm direction=%s"', offset, direction))
+    end
   end
-end)
-vim.keymap.set({ "n", "t", "i", "v" }, [[<C-\>]], function()
-  if vim.v.count > 0 then
-    vim.cmd([[exe v:count . "ToggleTerm direction=vertical"]])
-  else
-    vim.cmd([[ToggleTerm direction=vertical]])
-  end
-end)
+end
+vim.keymap.set({ "n", "t", "i", "v" }, [[<A-\>]], scope_toggleterm("float"))
+vim.keymap.set({ "n", "t", "i", "v" }, [[<C-\>]], scope_toggleterm("vertical"))
 
 local term_clear = function()
   vim.fn.feedkeys("^L", "n")
@@ -64,4 +64,3 @@ vim.keymap.set("n", "<leader>fg", function()
     builtin.live_grep()
   end
 end, {})
-
