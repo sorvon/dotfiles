@@ -38,16 +38,14 @@ try {
 } catch { rm -f $"($nu.user-autoload-dirs | first)/activate.nu"}
 
 def --env set_proxy [ip: string port: string] {
-  if (nc -z $ip $port | complete | get exit_code) == 0 {
-    load-env {
-      http_proxy: $"http://($ip):($port)", 
-      https_proxy: $"http://($ip):($port)",
-      all_proxy: $"socks5://($ip):($port)",
-    }
+  load-env {
+    http_proxy: $"http://($ip):($port)", 
+    https_proxy: $"http://($ip):($port)",
+    all_proxy: $"socks5://($ip):($port)",
   }
 }
 
-def --env hide_proxy [ip: string port: string] {
+def --env hide_proxy [] {
   hide-env  http_proxy https_proxy all_proxy
 }
 
