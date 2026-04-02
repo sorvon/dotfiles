@@ -49,6 +49,13 @@ def --env hide_proxy [] {
   hide-env  http_proxy https_proxy all_proxy
 }
 
+def pacman_sort [] {
+  pacman -Qei | rg 'Name[^:]+: ' -r '' | lines 
+  | zip (pacman -Qei | rg 'Installed Size[^:]+: ' -r '' | str replace -a "i" "" | lines) 
+  | reduce -f [[name size]; [0 0]] { |el acc| $acc | append [{name:$el.0 size:($el.1 | into filesize)}] } 
+  | skip 1 | sort-by size
+}
+
 def --env y [...args] {
   let tmp = (mktemp -t "yazi-cwd.XXXXXX")
   yazi ...$args --cwd-file $tmp
