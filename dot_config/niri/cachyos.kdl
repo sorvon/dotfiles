@@ -10,6 +10,9 @@ spawn-at-startup "solaar" "--window" "hide"
 binds {
   Mod+Return hotkey-overlay-title="Open Terminal" { spawn "neovide" "--" "-c" "term"; }
   Mod+D hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+  Mod+F { maximize-window-to-edges; }
+  Mod+Shift+F { fullscreen-window;  }
+  Mod+Alt+F { toggle-windowed-fullscreen;  }
   Mod+Shift+H { focus-column-left; }
   Mod+Shift+L { focus-column-right; }
   Mod+Shift+K { focus-window-up; }
