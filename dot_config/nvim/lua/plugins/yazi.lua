@@ -16,7 +16,9 @@ return {
     {
       -- Open in the current working directory
       "<leader>cw",
-      "<cmd>Yazi cwd<cr>",
+      function()
+        require("yazi").yazi(nil, LazyVim.root())
+      end,
       desc = "Open the file manager in nvim's working directory",
     },
     {
@@ -29,8 +31,26 @@ return {
     -- if you want to open yazi instead of netrw, see below for more info
     open_for_directories = false,
     keymaps = {
-      show_help = "<f1>",
+      change_working_directory = false,
     },
+    set_keymappings_function = function(yazi_buffer_id, config, context)
+      vim.keymap.set({ "t" }, "<c-p>", function()
+        local last_directory = context.ya_process.cwd
+        if not last_directory then
+          assert(context.input_path, "No input_path found. Expected yazi to be started with an input_path")
+          if context.input_path:is_file() then
+            last_directory = context.input_path:parent().filename
+          else
+            last_directory = context.input_path.filename
+          end
+        end
+
+        if last_directory ~= vim.fn.getcwd() then
+          vim.notify('tab cwd changed to "' .. last_directory .. '"')
+          vim.cmd({ cmd = "tcd", args = { last_directory } })
+        end
+      end, { buffer = yazi_buffer_id })
+    end,
   },
   -- 👇 if you use `open_for_directories=true`, this is recommended
   init = function()
