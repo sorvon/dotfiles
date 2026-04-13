@@ -3,6 +3,8 @@ vim.g.neovide_scale_factor = 1.0
 vim.g.neovime_no_version_warning = true
 -- 影响性能
 vim.g.neovide_floating_blur = false
+vim.g.neovide_floating_blur_amount_x = 0
+vim.g.neovide_floating_blur_amount_y = 0
 
 local change_scale_factor = function(delta)
   vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
