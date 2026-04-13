@@ -38,7 +38,7 @@ return {
                   pattern = "/home/dyh/workspace/O45KZH-SECX/sec-server-gateway/**/*.xml",
                 },
                 {
-                  systemId = vim.env.PWD .. "/o45-ufx-common/src/main/resources/META-INF/t2_function.xsd",
+                  systemId = vim.fn.getcwd() .. "/o45-ufx-common/src/main/resources/META-INF/t2_function.xsd",
                   pattern = "**/o45-ufx-starter/**/*.xml",
                 },
               },
