@@ -2,7 +2,16 @@ return {
   "nanozuki/tabby.nvim",
   ---@type TabbyConfig
   opts = {
-    -- configs...
+    option = {
+      tab_name = {
+        name_fallback = function(tabid)
+          return tabid
+        end,
+        override = function(tabid)
+          return vim.fn.fnamemodify(vim.fn.getcwd(-1, tabid), ':t')
+        end,
+      },
+    }
   },
   keys = {
     { "<a-1>", "<cmd>tabnext 1<cr>", mode = { "n", "i", "x", "t" } },
