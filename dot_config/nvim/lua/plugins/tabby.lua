@@ -5,13 +5,16 @@ return {
     option = {
       tab_name = {
         name_fallback = function(tabid)
-          return tabid
-        end,
-        override = function(tabid)
-          return vim.fn.fnamemodify(vim.fn.getcwd(-1, tabid), ':t')
+          local api = require("tabby.module.api")
+          local ok, cwd = pcall(vim.fn.getcwd, -1, api.get_tab_number(tabid))
+          if ok then
+            return vim.fn.fnamemodify(cwd, ":t")
+          else
+            return "" .. tabid
+          end
         end,
       },
-    }
+    },
   },
   keys = {
     { "<a-1>", "<cmd>tabnext 1<cr>", mode = { "n", "i", "x", "t" } },
