@@ -16,7 +16,17 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   git = {
-    timeout = "1200"
+    timeout = "1200",
+    url_format = "https://gh-proxy.org/https://github.com/%s.git",
+    -- url_format = "https://cdn.jsdelivr.net/gh/%s.git",
+    -- url_format = "https://gitmirror.com/%s.git",
+    -- url_format = "https://github.com/%s.git",
+    throttle = {
+      enabled = true, -- not enabled by default
+      -- max 2 ops every 5 seconds
+      rate = 2,
+      duration = 1000, -- in ms
+    },
   },
   spec = {
     -- add LazyVim and import its plugins
