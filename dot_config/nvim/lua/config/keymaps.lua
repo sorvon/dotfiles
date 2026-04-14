@@ -22,7 +22,7 @@ vim.keymap.set({ "n", "t" }, "<A-/>", function()
   lazygit:toggle()
 end, { desc = "Lazygit (Root Dir)" })
 
-function scope_toggleterm(direction)
+local function scope_toggleterm(direction)
   return function()
     local buf_id = vim.api.nvim_get_current_buf()
     local buf_name = vim.api.nvim_buf_get_name(buf_id)
@@ -34,8 +34,18 @@ function scope_toggleterm(direction)
     end
   end
 end
+local function toggleterm(direction)
+  return function()
+    if vim.v.count > 0 then
+      vim.cmd(string.format('exe %d . "ToggleTerm direction=%s"', direction))
+    else
+      vim.cmd(string.format("ToggleTerm direction=%s", direction))
+    end
+  end
+end
 vim.keymap.set({ "n", "t", "i", "v" }, [[<A-\>]], scope_toggleterm("float"))
 vim.keymap.set({ "n", "t", "i", "v" }, [[<C-\>]], scope_toggleterm("vertical"))
+vim.keymap.set({ "n", "v" }, [[<leader>t]], toggleterm("tab"))
 
 local term_clear = function()
   vim.fn.feedkeys("^L", "n")
