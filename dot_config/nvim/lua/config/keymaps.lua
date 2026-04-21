@@ -37,7 +37,7 @@ end
 local function toggleterm(direction)
   return function()
     if vim.v.count > 0 then
-      vim.cmd(string.format('exe %d . "ToggleTerm direction=%s"', direction))
+      vim.cmd(string.format('exe %d . "ToggleTerm direction=%s"', vim.v.count, direction))
     else
       vim.cmd(string.format("ToggleTerm direction=%s", direction))
     end
@@ -45,7 +45,7 @@ local function toggleterm(direction)
 end
 vim.keymap.set({ "n", "t", "i", "v" }, [[<A-\>]], scope_toggleterm("float"))
 vim.keymap.set({ "n", "t", "i", "v" }, [[<C-\>]], scope_toggleterm("vertical"))
-vim.keymap.set({ "n", "v" }, [[<leader>t]], toggleterm("tab"))
+vim.keymap.set({ "n", "t", "i", "v" }, [[<c-t>]], toggleterm("tab"))
 
 local term_clear = function()
   vim.fn.feedkeys("^L", "n")
