@@ -1,6 +1,5 @@
 vim.o.guifont = "Maple Mono NF CN:h12"
 vim.g.neovide_scale_factor = 1.0
-vim.g.neovime_no_version_warning = true
 -- 影响性能
 vim.g.neovide_floating_blur = false
 vim.g.neovide_floating_blur_amount_x = 0
