@@ -17,7 +17,7 @@ return {
     },
   },
   opts = {
-    mode = "toggleterm",
+    mode = "tab",
     filetype = {
       v = "v run",
       quarto = {
