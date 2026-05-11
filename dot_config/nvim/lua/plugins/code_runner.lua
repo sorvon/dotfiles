@@ -22,7 +22,7 @@ return {
       --  Position to open the terminal, this option is ignored if mode ~= term
       position = "botright",
       -- window size, this option is ignored if mode == tab
-      size = 40,
+      size = 12,
     },
     filetype = {
       v = "v run",
