@@ -17,7 +17,13 @@ return {
     },
   },
   opts = {
-    mode = "tab",
+    mode = "term",
+    term = {
+      --  Position to open the terminal, this option is ignored if mode ~= term
+      position = "botright",
+      -- window size, this option is ignored if mode == tab
+      size = 40,
+    },
     filetype = {
       v = "v run",
       quarto = {
