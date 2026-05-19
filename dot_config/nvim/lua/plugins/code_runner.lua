@@ -89,7 +89,7 @@ return {
       sh = "bash",
       typescript = "deno run",
       typescriptreact = "yarn dev$end",
-      rust = "cd $dir ; rustc $fileName ; $dir$fileNameWithoutExt",
+      rust = "cargo run",
       http = function()
         require("kulala").run()
       end,
