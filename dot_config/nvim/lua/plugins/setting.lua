@@ -169,7 +169,9 @@ return {
     opts = {
       ring = {
         update_register_on_cycle = true,
-        permanent_wrapper = require("yanky.wrappers").remove_carriage_return,
+        permanent_wrapper = function(next)
+          return require("yanky.wrappers").remove_carriage_return(next)
+        end,
       },
       system_clipboard = {
         sync_with_ring = true,
