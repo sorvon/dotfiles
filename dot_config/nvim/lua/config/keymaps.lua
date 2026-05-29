@@ -8,7 +8,8 @@ vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], { desc = "wincmd j" })
 vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], { desc = "wincmd k" })
 vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], { desc = "wincmd l" })
 vim.keymap.set({ "n", "x", "t", "i" }, "<a-s-q>", function()
-  vim.fn.system("clipcli qr")
+  local url = "http://" .. vim.g.clipboard_sync_cli_server .. "/clipboard/qrcode_show"
+  require("plenary.curl").post(url)
 end)
 local lazygit = require("toggleterm.terminal").Terminal:new({
   id = 99,

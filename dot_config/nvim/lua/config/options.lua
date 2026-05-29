@@ -13,16 +13,59 @@ if vim.g.neovide then
   require("config.neovide")
 end
 
-if vim.fn.executable("clipcli") then
+vim.g.clipboard_sync_cli_server = vim.fn.getenv("CLIPBOARD_SYNC_CLI_SERVER")
+print(vim.g.clipboard_sync_cli_server)
+if vim.g.clipboard_sync_cli_server ~= vim.NIL then
+  local curl = require("plenary.curl")
+  local clipboard_server_connect = true
+  local url = "http://" .. vim.g.clipboard_sync_cli_server .. "/clipboard/base64"
+
+  local function clipboard_copy(reg)
+    return function(lines)
+      local s = table.concat(lines, "\n")
+      local success, res = pcall(curl.post, url, {
+        body = vim.base64.encode(s),
+        timeout = 500,
+      })
+      if not success or res.status ~= 200 then
+        clipboard_server_connect = false
+        print("clipboard_server disconnect")
+        require("vim.ui.clipboard.osc52").copy(reg)(lines)
+      else
+        clipboard_server_connect = true
+      end
+    end
+  end
+
+  local function clipboard_paste()
+    if not clipboard_server_connect then
+      return { vim.fn.getreg('"') }
+    end
+    local success, res = pcall(curl.get, url, { timeout = 500 })
+    if not success or res.status ~= 200 then
+      clipboard_server_connect = false
+      print("clipboard_server disconnect")
+      return { vim.fn.getreg('"') }
+    else
+      clipboard_server_connect = true
+    end
+    local content = vim.base64.decode(res.body)
+    local lines = vim.split(content, "\n")
+    if vim.o.clipboard == "" then
+      vim.fn.setreg('"', lines)
+    end
+    return lines
+  end
+
   vim.g.clipboard = {
-    name = "clipcli",
+    name = "clipboard_sync_cli",
     copy = {
-      ["+"] = { "clipcli", "set" },
-      ["*"] = { "clipcli", "set" },
+      ["+"] = clipboard_copy("+"),
+      ["*"] = clipboard_copy("*"),
     },
     paste = {
-      ["+"] = { "clipcli", "get" },
-      ["*"] = { "clipcli", "get" },
+      ["+"] = clipboard_paste,
+      ["*"] = clipboard_paste,
     },
     cache_enabled = 1,
   }
