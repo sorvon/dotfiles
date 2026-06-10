@@ -9,6 +9,7 @@ return {
       'MeanderingProgrammer/render-markdown.nvim',
       opts = {
         file_types = { "markdown" },
+        win_options = { conceallevel = { rendered = 0 } },
       },
       ft = { "markdown" },
     },
@@ -21,6 +22,7 @@ return {
     show_notification = false,
     -- Show response in popup or split
     mode = "split",
+    auto_close = false,
     -- Default formatter
     formatters = {
       json = { 'jq' }, -- Make sure you have install jq in your system, e.g: brew install jq
