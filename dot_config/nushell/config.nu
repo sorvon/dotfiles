@@ -70,3 +70,4 @@ def --wrapped mvn8 [...args] {
   $env.JAVA_HOME = "/usr/lib/jvm/java-8-openjdk"
   mvn ...$args
 }
+source "~/.cargo/env.nu"
