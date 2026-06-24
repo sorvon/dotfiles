@@ -1,0 +1,2 @@
+dot_cargo/bin/executable_clipboard_sync_cli.exe filter=lfs diff=lfs merge=lfs -text
+dot_cargo/bin/executable_clipboard_sync_cli filter=lfs diff=lfs merge=lfs -text
