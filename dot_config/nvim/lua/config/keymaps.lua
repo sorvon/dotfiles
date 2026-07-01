@@ -11,7 +11,8 @@ vim.keymap.set({ "n", "x", "t", "i" }, "<a-s-q>", function()
   vim.fn.jobstart({ "clipboard_sync_cli", "qr-show", "-e", "gz" })
 end)
 vim.keymap.set({ "n", "x", "t", "i" }, "<a-s-c>", function()
-  vim.fn.jobstart({ "ufx", "commit"})
+  local obj = vim.system({ "ufx", "commit" }, { text = true }):wait()
+  print(obj.stdout)
 end)
 local lazygit = require("toggleterm.terminal").Terminal:new({
   id = 99,

@@ -14,7 +14,6 @@ if vim.g.neovide then
 end
 
 vim.g.clipboard_sync_cli_server = vim.fn.getenv("CLIPBOARD_SYNC_CLI_SERVER")
-print(vim.g.clipboard_sync_cli_server)
 if vim.g.clipboard_sync_cli_server ~= vim.NIL and vim.fn.executable("clipboard_sync_cli") then
   vim.g.clipboard = {
     name = "clipboard_sync_cli",
