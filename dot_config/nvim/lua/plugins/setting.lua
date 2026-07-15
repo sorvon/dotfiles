@@ -8,16 +8,11 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "solarized",
+      colorscheme = "nordfox",
     },
   },
   {
-    "catppuccin",
-    opts = {
-      background = {
-        dark = "macchiato",
-      },
-    },
+    "EdenEast/nightfox.nvim",
   },
   {
     "nvim-mini/mini.surround",
