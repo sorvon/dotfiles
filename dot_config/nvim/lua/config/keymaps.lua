@@ -26,10 +26,16 @@ vim.keymap.set({ "n", "t" }, "<A-/>", function()
 end, { desc = "Lazygit (Root Dir)" })
 
 local function scope_toggleterm(direction)
+  local offset_cache = {}
   return function()
+    local tab_id = vim.api.nvim_get_current_tabpage()
     local buf_id = vim.api.nvim_get_current_buf()
     local buf_name = vim.api.nvim_buf_get_name(buf_id)
-    local offset = vim.api.nvim_get_current_tabpage() * 1000 + vim.v.count
+    local offset = tab_id * 1000 + vim.v.count1
+    if vim.v.count == 0 and offset_cache[tab_id] ~= nil then
+      offset = offset_cache[tab_id]
+    end
+    offset_cache[tab_id] = offset
     if string.match(buf_name, "^term://.*#toggleterm#%d+$") then
       vim.cmd(string.format("ToggleTerm direction=%s", direction))
     else
@@ -37,6 +43,7 @@ local function scope_toggleterm(direction)
     end
   end
 end
+
 local function toggleterm(direction)
   return function()
     if vim.v.count > 0 then
