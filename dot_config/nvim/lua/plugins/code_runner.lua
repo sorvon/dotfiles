@@ -1,17 +1,32 @@
 return {
   "CRAG666/code_runner.nvim",
   event = "VeryLazy",
-  -- name = "code_runner",
-  cmd = { "RunCode", "RunFile", "RunProject" },
-  -- dev = true,
+  cmd = { "RunCode", "RunFile", "RunProject", "RunClose", "CRFileType", "CRProjects" },
   keys = {
     {
       "<leader>rr",
       function()
         vim.cmd("w")
         vim.defer_fn(function()
-          require("code_runner").run_code()
+          require("code_runner").run_filetype()
         end, 100)
+      end,
+      desc = "[e]xcute file",
+    },
+    {
+      "<leader>rp",
+      function()
+        vim.cmd("w")
+        vim.defer_fn(function()
+          require("code_runner").run_project()
+        end, 100)
+      end,
+      desc = "[e]xcute project",
+    },
+    {
+      "<leader>rq",
+      function()
+        require("code_runner").run_close()
       end,
       desc = "[e]xcute code",
     },
@@ -89,7 +104,7 @@ return {
       sh = "bash",
       typescript = "deno run",
       typescriptreact = "yarn dev$end",
-      rust = "cargo run",
+      rust = "cargo run $end",
       http = function()
         require("kulala").run()
       end,
