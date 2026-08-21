@@ -24,7 +24,7 @@ return {
       desc = "[e]xcute project",
     },
     {
-      "<leader>rq",
+      "q",
       function()
         require("code_runner").run_close()
       end,
