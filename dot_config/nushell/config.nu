@@ -4,14 +4,14 @@ $env.config.table.mode = "rounded"
 $env.config.edit_mode = 'vi'
 $env.config.keybindings ++= [
   {
-    name: BackspaceWord
+    name: BackspaceWordAltBackspace
     modifier: alt
     keycode: backspace
     mode: [vi_insert vi_normal emacs]
     event: { edit: BackspaceWord}
   }
   {
-    name: BackspaceWord
+    name: BackspaceWordCtrlH
     modifier: control
     keycode: Char_h
     mode: [vi_insert vi_normal emacs]
@@ -50,8 +50,8 @@ def --env hide_proxy [] {
 }
 
 def pacman_sort [] {
-  pacman -Qei | rg 'Name[^:]+: ' -r '' | lines 
-  | zip (pacman -Qei | rg 'Installed Size[^:]+: ' -r '' | str replace -a "i" "" | lines) 
+  pacman -Qi | rg 'Name[^:]+: ' -r '' | lines 
+  | zip (pacman -Qi | rg 'Installed Size[^:]+: ' -r '' | str replace -a "i" "" | lines) 
   | reduce -f [[name size]; [0 0]] { |el acc| $acc | append [{name:$el.0 size:($el.1 | into filesize)}] } 
   | skip 1 | sort-by size
 }
