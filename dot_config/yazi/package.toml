@@ -1,12 +1,12 @@
 [[plugin.deps]]
-use = "dedukun/bookmarks"
-rev = "fbb7c00"
-hash = "49378c96ad8bcb66ee29abaa49901d3b"
+use = "TD-Sky/sudo"
+rev = "74e17fe"
+hash = "781dab984cea0fdba1162cacf78c2533"
 
 [[plugin.deps]]
-use = "TD-Sky/sudo"
-rev = "af70636"
-hash = "5f1f3deeaf08ba2089d0e7e340bf1f84"
+use = "h-hg/yamb"
+rev = "971b858"
+hash = "da4534745930e827a44d4585bbd965eb"
 
 [flavor]
 deps = []
