@@ -21,7 +21,8 @@ require("lazy").setup({
     -- url_format = "https://cdn.jsdelivr.net/gh/%s.git",
     -- url_format = "https://gitmirror.com/%s.git",
     -- url_format = "https://github.com/%s.git",
-    url_format = "https://cdn.gh-proxy.org/https://github.com/%s.git",
+    url_format = vim.fn.getenv("http_proxy") == vim.NIL and "https://cdn.gh-proxy.org/https://github.com/%s.git"
+      or "https://github.com/%s.git",
     throttle = {
       enabled = true,
       -- max 1 ops every 0.5 seconds
