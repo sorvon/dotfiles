@@ -1,0 +1,14 @@
+#!/usr/bin/env nu
+
+def main [x?: string] {
+  let x = $x | str trim -c "'"
+  match $x {
+    null => { /mnt/c/Windows/explorer.exe . }
+    _ => {
+      let filename = ($x | path expand | path relative-to $env.PWD) 
+      print $filename
+      /mnt/c/Windows/explorer.exe $filename
+    }
+  } 
+  return 0
+}
