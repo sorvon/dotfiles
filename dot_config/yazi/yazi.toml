@@ -9,5 +9,5 @@ show_symlink   = true
 
 [opener]
 win_start = [
-  { run = 'win_start "$1"', block = true }
+  { run = 'win_start "%h"', block = true }
 ]
