@@ -7,9 +7,8 @@ include "./cfg/rules.kdl"
 include "./cfg/misc.kdl"
 
 spawn-at-startup "solaar" "--window" "hide"
-spawn-at-startup "nu" "~/.config/niri/script/lock_when_autostart.nu"
 binds {
-  Mod+Return hotkey-overlay-title="Open Terminal" { spawn "neovide" "--" "-c" "term"; }
+  Mod+Return hotkey-overlay-title="Open Terminal" { spawn "alacritty"; }
   Mod+D hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
   Mod+F { maximize-window-to-edges; }
   Mod+Shift+F { fullscreen-window;  }
