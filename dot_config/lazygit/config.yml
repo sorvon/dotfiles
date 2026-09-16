@@ -1,8 +1,8 @@
 git:
-  pagers:
-    - pager: $HOME/.config/lazygit/delta_decode
+  diffRenderers:
+    - command: $HOME/.config/lazygit/delta_decode
       colorArg: always
-    - pager: delta --paging=never
+    - command: delta --paging=never
       colorArg: always
 keybinding:
   universal:
