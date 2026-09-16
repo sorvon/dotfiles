@@ -71,3 +71,31 @@ def --wrapped mvn8 [...args] {
   mvn ...$args
 }
 source "~/.cargo/env.nu"
+
+def zellij-update-tabname [] {
+  if ("ZELLIJ" not-in $env) {
+    return
+  }
+  let tab_index = zellij action current-tab-info -j | from json | get position | into int
+  mut tabname = "";
+  let path = $env.PWD
+  let dir = if $path == $env.HOME {
+    "~"
+  } else {
+    $path | path basename
+  }
+  $tabname = $"($tab_index + 1).($dir)";
+
+  zellij action rename-tab $tabname;
+}
+
+$env.config.hooks = {
+  pre_execution: [
+    { zellij-update-tabname }
+  ],
+  env_change: {
+    PWD: [
+      { zellij-update-tabname }
+    ]
+  }
+}
