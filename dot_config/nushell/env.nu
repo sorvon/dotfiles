@@ -2,6 +2,10 @@ $env.EDITOR = "nvim"
 $env.SHELL = "nu"
 $env.MANPAGER = "nvim +Man!"
 
+if $env.HOME? == null {
+  $env.HOME = $'($env.HOMEDRIVE)\($env.HOMEPATH)'
+}
+
 def --env set_proxy [ip: string port: string] {
   if (nc -z $ip $port | complete | get exit_code) == 0 {
     load-env {
