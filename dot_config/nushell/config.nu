@@ -1,3 +1,4 @@
+use std/config *
 $env.config.buffer_editor = "nvim"
 $env.config.show_banner = false
 $env.config.table.mode = "rounded"
@@ -96,6 +97,26 @@ $env.config.hooks = {
   env_change: {
     PWD: [
       { zellij-update-tabname }
+      {||
+        if (which direnv | is-empty) {
+          # If direnv isn't installed, do nothing
+          return
+        }
+        let e = direnv export json | from json | default {}
+        let e = $e | items {
+          |key, value|
+          let up_value = $e | get -o ($key | str upcase)
+          if ($value | is-empty) {
+            { $key: $up_value }
+          } else {
+            { $key: $value }
+          }
+        } | into record
+
+        $e | update cells --columns [ PATH ] {
+          do (env-conversions).path.from_string $in
+        } | load-env
+      }
     ]
   }
 }
