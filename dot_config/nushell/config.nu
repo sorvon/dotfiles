@@ -19,13 +19,9 @@ $env.config.keybindings ++= [
     event: { edit: BackspaceWord}
   }
 ]
+
 alias chez = chezmoi
-alias ze = do {
-  if $env.ZELLIJ? == null {
-    printf '\e[?1004h'
-  }
-  zellij
-}
+alias ze =   zellij
 
 $env.LS_COLORS = (vivid generate snazzy)
 mkdir ($nu.data-dir | path join "vendor/autoload")
@@ -105,7 +101,7 @@ $env.config.hooks = {
         let e = direnv export json | from json | default {}
         let e = $e | items {
           |key, value|
-          let up_value = $e | get -o ($key | str upcase)
+          let up_value = $e | get -o ($key | str uppercase)
           if ($value | is-empty) {
             { $key: $up_value }
           } else {
