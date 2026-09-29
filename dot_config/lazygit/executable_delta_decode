@@ -6,4 +6,4 @@ while IFS= read -r line; do
     else
         echo "$line" | iconv -f GBK -t UTF-8 2>/dev/null || echo "$line"
     fi
-done | delta --paging=never
+done | delta --paging=never --max-line-length 30000
