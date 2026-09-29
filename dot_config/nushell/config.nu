@@ -1,4 +1,13 @@
 use std/config *
+
+if $env.HOME? == null {
+  $env.HOME = $'($env.HOMEDRIVE)\($env.HOMEPATH)'
+}
+$env.COLORTERM = "truecolor"
+$env.EDITOR = "nvim"
+$env.SHELL = "nu"
+$env.MANPAGER = "nvim +Man!"
+
 $env.config.buffer_editor = "nvim"
 $env.config.show_banner = false
 $env.config.table.mode = "rounded"
@@ -42,6 +51,7 @@ def --env set_proxy [ip: string port: string] {
   }
 }
 
+
 def --env hide_proxy [] {
   hide-env  http_proxy https_proxy all_proxy
 }
@@ -67,7 +77,10 @@ def --wrapped mvn8 [...args] {
   $env.JAVA_HOME = "/usr/lib/jvm/java-8-openjdk"
   mvn ...$args
 }
-source "~/.cargo/env.nu"
+const NU_PLUGIN_DIRS = [
+  ($nu.current-exe | path dirname)
+  ...$NU_PLUGIN_DIRS
+]
 
 def zellij-update-tabname [] {
   if ("ZELLIJ" not-in $env) {
@@ -116,3 +129,14 @@ $env.config.hooks = {
     ]
   }
 }
+
+# cargo
+if ("~/.cargo/env.nu" | path exists) {
+  source "~/.cargo/env.nu"
+}
+# cargo end
+
+# pnpm
+$env.PNPM_HOME = "/home/dyh/.local/share/pnpm"
+$env.PATH = ($env.PATH | split row (char esep) | prepend $env.PNPM_HOME )
+# pnpm end
