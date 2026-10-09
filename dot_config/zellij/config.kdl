@@ -166,6 +166,7 @@ keybinds clear-defaults=true {
         bind "Alt Shift [" { PreviousSwapLayout; }
         bind "Alt Shift ]" { NextSwapLayout; }
         bind "Alt Shift f" { ToggleFloatingPanes; }
+        bind "Alt Shift \\" { ToggleFloatingPanes; }
         bind "Alt Shift h" { MoveFocusOrTab "left"; }
         bind "Alt Shift j" { MoveFocus "down"; }
         bind "Alt Shift k" { MoveFocus "up"; }
@@ -221,6 +222,8 @@ keybinds clear-defaults=true {
         bind "right" { PageScrollDown; }
         bind "[" { ScrollToPreviousPrompt; }
         bind "]" { ScrollToNextPrompt; }
+        bind "Alt Shift f" { ToggleFloatingPanes; }
+        bind "Alt Shift \\" { ToggleFloatingPanes; }
         bind "Ctrl b" { PageScrollUp; }
         bind "Ctrl c" { ScrollToBottom; SwitchToMode "locked"; }
         bind "d" { HalfPageScrollDown; }
@@ -454,7 +457,7 @@ pane_frame_style "titles"
 // (Requires restart)
 // Default: true (if the host terminal supports it)
 // 
-// support_kitty_keyboard_protocol false
+support_kitty_keyboard_protocol true
  
 // Whether to stack panes when resizing beyond a certain size
 // Default: true
@@ -470,3 +473,4 @@ show_startup_tips false
 // Default: true
 // 
 // show_release_notes false
+dangerously_enable_paste_buffer_read true
