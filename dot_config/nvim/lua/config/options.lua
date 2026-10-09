@@ -9,7 +9,7 @@ vim.opt.fileencodings = "ucs-bom,utf-8,gbk,default,latin1"
 vim.opt.textwidth = 300
 vim.opt.smartindent = true
 vim.opt.expandtab = true
-if vim.fn.has("win32") and vim.o.shell == "nu" then
+if vim.fn.has("win32") and vim.o.shell == "nu" and not vim.fn.has("wsl") then
   vim.o.shell = "cmd"
 end
 if vim.g.neovide then
