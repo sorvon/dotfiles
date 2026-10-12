@@ -11,35 +11,31 @@ $env.MANPAGER = "nvim +Man!"
 $env.config.buffer_editor = "nvim"
 $env.config.show_banner = false
 $env.config.table.mode = "rounded"
-$env.config.edit_mode = 'vi'
+$env.config.edit_mode = 'helix'
 $env.config.keybindings ++= [
   {
     name: BackspaceWordAltBackspace
     modifier: alt
     keycode: backspace
-    mode: [vi_insert vi_normal emacs]
+    mode: [vi_insert vi_normal emacs helix_insert]
     event: { edit: BackspaceWord}
   }
   {
     name: BackspaceWordCtrlH
     modifier: control
     keycode: Char_h
-    mode: [vi_insert vi_normal emacs]
+    mode: [vi_insert vi_normal emacs helix_insert]
     event: { edit: BackspaceWord}
   }
   {
     name: Unfreeze
     modifier: control
     keycode: Char_z
-    mode: [vi_insert vi_normal emacs]
-    event: [
-      { edit: Clear }
-      {
-        edit: InsertString,
-        value: "job unfreeze"
-      }
-      { send: Enter }
-    ]
+    mode: [vi_insert vi_normal emacs helix_insert]
+    event: {
+      send: executehostcommand,
+      cmd: "job unfreeze"
+    },
   }
 ]
 
