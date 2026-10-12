@@ -9,7 +9,8 @@ include "./cfg/misc.kdl"
 spawn-at-startup "solaar" "--window" "hide"
 binds {
   Mod+Return hotkey-overlay-title="Open Terminal" { spawn "alacritty"; }
-  Mod+D hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+  Mod+D hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
+  Mod+Shift+C hotkey-overlay-title="Open clipboard" { spawn-sh "noctalia msg panel-toggle clipboard"; }
   Mod+F { maximize-window-to-edges; }
   Mod+Shift+F { fullscreen-window;  }
   Mod+Alt+F { toggle-windowed-fullscreen;  }
