@@ -9,4 +9,4 @@ keybinding:
     suspendApp: <disabled>
 os:
   editPreset: "nvim-remote"
-  copyToClipboardCmd: $HOME/.config/lazygit/osc52 {{text}}
+  copyToClipboardCmd: ~/.config/lazygit/osc52 {{text}}
