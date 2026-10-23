@@ -4,7 +4,7 @@ if $env.HOME? == null {
   $env.HOME = $'($env.HOMEDRIVE)\($env.HOMEPATH)'
 }
 $env.COLORTERM = "truecolor"
-$env.EDITOR = "nvim"
+$env.EDITOR = "helix"
 $env.SHELL = "nu"
 $env.MANPAGER = "nvim +Man!"
 
@@ -40,7 +40,9 @@ $env.config.keybindings ++= [
 ]
 
 alias chez = chezmoi
+alias cz = chezmoi
 alias ze =   zellij
+alias hx = helix
 
 $env.LS_COLORS = (vivid generate snazzy)
 mkdir ($nu.data-dir | path join "vendor/autoload")
