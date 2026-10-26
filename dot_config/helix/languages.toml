@@ -1,0 +1,35 @@
+[language-server.lemminx]
+command = "lemminx"
+
+[language-server.lemminx.config.xml.format]
+enabled = true
+insertSpaces = true
+maxLineWidth = 300
+splitAttributes = "preserve"
+preservedNewlines = 1
+preserveAttributeLineBreaks = true
+spaceBeforeEmptyCloseTag = true
+formatComments = true
+grammarAwareFormatting = true
+preserveEmptyContent = true
+
+[[language-server.lemminx.config.xml.fileAssociations]]
+systemId = "/home/dyh/workspace/O45KZH-SECX/sec-server-gateway/o45-sec-common/src/main/resources/META-INF/t2_function.xsd"
+pattern = "/home/dyh/workspace/O45KZH-SECX/sec-server-gateway/**/*.xml"
+
+[[language-server.lemminx.config.xml.fileAssociations]]
+systemId = "o45-ufx-common/src/main/resources/META-INF/t2_function.xsd"
+pattern = "**/o45-ufx-starter/**/*.xml"
+
+[[language]]
+name = "xml"
+language-servers = ["lemminx"]
+auto-format = false
+
+[[language]]
+name = "http"
+scope = "source.http"
+injection-regex = "(http)"
+file-types = ["http"]
+comment-token = "--"
+indent = { tab-width = 2, unit = " " }

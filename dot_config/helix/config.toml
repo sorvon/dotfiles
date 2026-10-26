@@ -1,0 +1,76 @@
+theme = "nordfox"
+
+[editor]
+shell = ["nu", "--stdin", "-c"]
+cursorline = true
+line-number = "relative"
+auto-format = true
+end-of-line-diagnostics = "hint"
+default-yank-register = "+"
+
+[editor.clipboard-provider.custom]
+yank = { command = "clipcli", args = ["get"] }
+paste = { command = "clipcli", args = ["set"]}
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+
+[editor.indent-guides]
+render = true
+
+[editor.cursor-shape]
+insert = "bar"
+
+[keys.normal]
+x = "select_line_below"
+X = "select_line_above"
+"-" = "switch_to_lowercase"
+"_" = "switch_to_uppercase"
+
+
+[keys.normal."\\"]
+# scooter
+s = [
+    ':write-all',
+    ':pipe-to zellij run -i -c --blocking -- scooter',
+    ':reload-all',
+]
+
+# lazygit
+g = [
+    ':write-all',
+    ':pipe-to zellij run -i -c --blocking -- lazygit',
+    ':reload-all',
+]
+
+# yazi file
+y = [
+    ':write-all',
+    ':sh $nu.temp-dir | path join yazi-path | rm -f $in',
+    ':pipe-to zellij run -i -c --blocking -- yazi %sh{ "%{buffer_name}" | path expand } --chooser-file %sh{ $nu.temp-dir | path join yazi-path }',
+    ':open %sh{ $nu.temp-dir | path join yazi-path | cat $in }',
+    ':reload-all',
+]
+
+# yazi pwd
+Y = [
+    ':write-all',
+    ':sh $nu.temp-dir | path join yazi-path | rm -f $in',
+    ':pipe-to zellij run -i -c --blocking -- yazi %sh{ pwd } --chooser-file %sh{ $nu.temp-dir | path join yazi-path }',
+    ':open %sh{ $nu.temp-dir | path join yazi-path | cat $in }',
+    ':reload-all',
+]
+
+[keys.normal."\\".u]
+s = ":toggle soft-wrap.enable"
+
+# git
+[keys.normal."\\".G]
+b = ":sh git log -n 5 --format='format:%%h (%%an: %%ar) %%s' --no-patch -L%{cursor_line},+1:%{buffer_name}"
+
+# runner
+[keys.normal."\\".r]
+r = [
+    ':write-all',
+    ":pipe-to zellij run -d right -- code_runner_hx %{buffer_name} %{language} %{cursor_line}",
+]
