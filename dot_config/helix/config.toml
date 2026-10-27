@@ -9,8 +9,8 @@ end-of-line-diagnostics = "hint"
 default-yank-register = "+"
 
 [editor.clipboard-provider.custom]
-yank = { command = "clipcli", args = ["get"] }
-paste = { command = "clipcli", args = ["set"]}
+yank = { command = "nu", args = ["-l", "-c", "clip-get"] }
+paste = { command = "nu", args = ["-l", "--stdin", "-c", "clip-set"] }
 
 [editor.inline-diagnostics]
 cursor-line = "warning"
@@ -72,5 +72,5 @@ b = ":sh git log -n 5 --format='format:%%h (%%an: %%ar) %%s' --no-patch -L%{curs
 [keys.normal."\\".r]
 r = [
     ':write-all',
-    ":pipe-to zellij run -d right -- code_runner_hx %{buffer_name} %{language} %{cursor_line}",
+    ":pipe-to zellij run -d right -- nu -l -c 'code_runner %{buffer_name} %{language} %{cursor_line}'",
 ]
