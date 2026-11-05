@@ -102,9 +102,20 @@ def clip-get [--server (-s): string] {
     $env_server
   }
   if $server == null {
-    return nativepaste
+    return (nativepaste)
   }
-  curl -s $"http://($server)/clipboard/text"
+  let ip_port = $server | split row ":"
+  let ip = $ip_port| get -o 0
+  let port = $ip_port | get -o 1
+  if (which nc | length) > 0 {
+    if (nc -z $ip $port | complete | get exit_code) == 0 {
+      curl -s $"http://($server)/clipboard/text"
+    } else {
+      nativepaste
+    }
+  } else {
+    curl -s $"http://($server)/clipboard/text"
+  }
 }
 
 def clip-set [--server (-s): string] {
@@ -143,11 +154,17 @@ def ccat [] {
 }
 
 def osc52copy [] {
-  let encoded = ($in | ccat | encode base64)
-  let seq = $"\e]52;c;($encoded)(char bel)"
-  let tty = if $nu.os-info.name == "windows" { "CONOUT$" } else { "/dev/tty" }
-  job spawn {
-    $"($seq) | save -f ($tty)"
+  use std/clip *
+  let seq = ($in | ccat | copy52)
+  if $env.ZELLIJ? != null {
+    try {
+      zellij action paste $seq
+    }
+  } else {
+    let tty = if $nu.os-info.name == "windows" { "CONOUT$" } else { "/dev/tty" }
+    job spawn {
+      $"($seq) | save -f ($tty)"
+    }
   }
 } 
 
