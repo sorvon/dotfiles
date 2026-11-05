@@ -155,16 +155,18 @@ def ccat [] {
 
 def osc52copy [] {
   use std/clip *
-  let seq = ($in | ccat | copy52)
+  let text = ($in | ccat)
+  let seq = ($text | copy52)
   if $env.ZELLIJ? != null {
     try {
       zellij action paste $seq
     }
-  } else {
-    let tty = if $nu.os-info.name == "windows" { "CONOUT$" } else { "/dev/tty" }
+  } else if $nu.os-info.name == "linux" {
     job spawn {
-      $"($seq) | save -f ($tty)"
+      $"($seq) | save -f /dev/tty"
     }
+  } else if $nu.os-info.name == "windows" {
+    $text | clip.exe
   }
 } 
 
