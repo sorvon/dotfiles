@@ -159,7 +159,7 @@ keybinds clear-defaults=true {
             SwitchToMode "locked"
         }
     }
-    shared_among "normal" "locked" {
+    shared_among "normal" "locked" "scroll" "search" {
         bind "Alt Shift +" { Resize "Increase"; }
         bind "Alt Shift -" { Resize "Decrease"; }
         bind "Alt Shift =" { Resize "Increase"; }
@@ -234,8 +234,6 @@ keybinds clear-defaults=true {
         bind "right" { PageScrollDown; }
         bind "[" { ScrollToPreviousPrompt; }
         bind "]" { ScrollToNextPrompt; }
-        bind "Alt Shift f" { ToggleFloatingPanes; }
-        bind "Alt Shift \\" { ToggleFloatingPanes; }
         bind "Ctrl b" { PageScrollUp; }
         bind "Ctrl c" { ScrollToBottom; SwitchToMode "locked"; }
         bind "d" { HalfPageScrollDown; }
