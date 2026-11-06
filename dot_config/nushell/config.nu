@@ -156,15 +156,15 @@ def ccat [] {
 def osc52copy [] {
   use std/clip *
   let text = ($in | ccat)
-  let seq = ($text | copy52)
-  if $env.ZELLIJ? != null {
-    try {
-      zellij action paste $seq
+  let seq = $'(ansi osc)52;c;($text | encode base64)(ansi st)'
+  if $nu.os-info.name == "linux" {
+    let tty = if (tty -s | complete | get exit_code) == 0 {
+      /dev/tty
+    } else {
+      let ppid = ps | find $nu.pid | get ppid | first
+      $"/proc/($ppid)/fd/1"
     }
-  } else if $nu.os-info.name == "linux" {
-    job spawn {
-      $"($seq) | save -f /dev/tty"
-    }
+    $seq | save -f $tty
   } else if $nu.os-info.name == "windows" {
     $text | clip.exe
   }
