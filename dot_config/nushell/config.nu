@@ -109,12 +109,12 @@ def clip-get [--server (-s): string] {
   let port = $ip_port | get -o 1
   if (which nc | length) > 0 {
     if (nc -z $ip $port | complete | get exit_code) == 0 {
-      curl -s $"http://($server)/clipboard/text"
+      http get -r $"http://($server)/clipboard/text"
     } else {
       nativepaste
     }
   } else {
-    curl -s $"http://($server)/clipboard/text"
+    http get -r $"http://($server)/clipboard/text"
   }
 }
 
@@ -135,13 +135,13 @@ def clip-set [--server (-s): string] {
   let port = $ip_port | get -o 1
   if (which nc | length) > 0 {
     if (nc -z $ip $port | complete | get exit_code) == 0 {
-      $text | ccat | curl -s -X POST $"http://($server)/clipboard/text" --data-binary @-
+      $text | ccat | http post -r $"http://($server)/clipboard/text"
     } else {
       $text | osc52copy
       return $text
     }
   } else {
-    $text | ccat | curl -s -X POST $"http://($server)/clipboard/text" --data-binary @-
+    $text | ccat | http post -r $"http://($server)/clipboard/text"
   }
   $text
 }
