@@ -47,7 +47,7 @@ g = [
 y = [
     ':write-all',
     ':sh $nu.temp-dir | path join yazi-path | rm -f $in',
-    ':pipe-to zellij run -i -c --blocking -- yazi %sh{ "%{buffer_name}" | path expand } --chooser-file %sh{ $nu.temp-dir | path join yazi-path }',
+    ":pipe-to zellij run -i -c --blocking -- yazi %sh{ '%{buffer_name}' | path expand } --chooser-file %sh{ $nu.temp-dir | path join yazi-path }",
     ':open %sh{ $nu.temp-dir | path join yazi-path | cat $in }',
     ':reload-all',
 ]
