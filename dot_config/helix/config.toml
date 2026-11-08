@@ -9,8 +9,8 @@ end-of-line-diagnostics = "hint"
 default-yank-register = "+"
 
 [editor.clipboard-provider.custom]
-yank = { command = "nu", args = ["-l", "-c", "clip-get"] }
-paste = { command = "nu", args = ["-l", "--stdin", "-c", "clip-set"] }
+yank = { command = "nu", args = ["~/.local/bin/clipcli.nu", "get"] }
+paste = { command = "nu", args = ["--stdin", "~/.local/bin/clipcli.nu", "set"] }
 
 [editor.inline-diagnostics]
 cursor-line = "warning"
