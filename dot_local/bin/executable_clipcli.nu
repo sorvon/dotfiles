@@ -82,4 +82,7 @@ def nativepaste [] {
   }
 }
 
-def main [] {}
+const self = path self
+def main [] {
+  nu $self -h
+}
