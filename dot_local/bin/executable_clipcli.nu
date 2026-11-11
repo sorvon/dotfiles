@@ -1,3 +1,5 @@
+#!/usr/bin/env nu
+
 def "main get" [--server (-s): string] {
   let env_server = $env.CLIPBOARD_SYNC_CLI_SERVER?
   let server = if $server != null {
