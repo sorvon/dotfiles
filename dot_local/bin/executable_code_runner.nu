@@ -1,7 +1,9 @@
+#!/usr/bin/env nu
+ 
 const self = path self
 def --wrapped  main [...args] {
   if $env.ZELLIJ? != null {
-    zellij run -f -- nu $self run ...$args
+    let _ = zellij run -f -- nu $self run ...$args
   } else {
     nu $self run ...$args
   }
@@ -11,18 +13,29 @@ def "main run" [buffer_name: string, langauge: string, cursor_line = 0] {
   use std/log
   let buffer_name = $buffer_name | path expand
   log info $"($buffer_name):($cursor_line)[($langauge)]"
-  match $langauge {
-    "nu" => {
-      nu $buffer_name
+  
+  let res = timeit --output  {
+    try {
+      match $langauge {
+        "nu" => {
+          nu $buffer_name
+        }
+        "python" => {
+          run-python $buffer_name
+        }
+        "hurl" => {
+          run-hurl $buffer_name $cursor_line
+        }
+        _ => { log info $"不支持的语言($langauge)" }
+      }
+    } catch {
+      |e|
+      $e
     }
-    "python" => {
-      run-python $buffer_name
-    }
-    "hurl" => {
-      run-hurl $buffer_name $cursor_line
-    }
-    _ => { log info $"不支持的语言($langauge)" }
   }
+  print "====================================="
+  print ($res | get output | to text)
+  print ($res | get time)
 }
 
 def run-python [buffer_name: string] {
