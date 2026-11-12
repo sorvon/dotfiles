@@ -7,3 +7,4 @@ keybinding:
     suspendApp: <disabled>
 os:
   editPreset: "helix"
+  copyToClipboardCmd: nu -c 'echo {{text}} | nu --stdin ~/.local/bin/clipcli.nu set'
