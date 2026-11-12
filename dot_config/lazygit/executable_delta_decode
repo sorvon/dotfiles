@@ -2,12 +2,5 @@
 
 $in | into binary | bytes split 0x[0A] | each {
   |line|
-  $line | ccat | str replace -a "\r" ""
+  $line | decode | str replace -a "\r" ""
 } | to text | delta --paging=never --max-line-length 30000
-
-def ccat [] {
-  match ($in | describe) {
-    "binary" => ($in | decode gbk)
-    _ => $in
-  }
-}
