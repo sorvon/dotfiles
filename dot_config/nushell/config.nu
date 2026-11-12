@@ -311,20 +311,10 @@ $env.config.hooks = {
           # If direnv isn't installed, do nothing
           return
         }
-        let e = direnv export json | from json | default {}
-        let e = $e | items {
-          |key, value|
-          let up_value = $e | get -o ($key | str uppercase)
-          if ($value | is-empty) {
-            { $key: $up_value }
-          } else {
-            { $key: $value }
-          }
-        } | into record
-
-        $e | update cells --columns [ PATH ] {
+        direnv export json | from json | default {}
+        | record where -k $it == ($it | str uppercase)   |update cells {
           do (env-conversions).path.from_string $in
-        } | load-env
+        } "PATH" | load-env
       }
     ]
   }
