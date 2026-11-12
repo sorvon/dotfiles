@@ -1,4 +1,4 @@
-#!/usr/bin/env nu
+#!/usr/bin/env -S nu --stdin
 
 def "main get" [--server (-s): string] {
   let env_server = $env.CLIPBOARD_SYNC_CLI_SERVER?
