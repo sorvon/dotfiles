@@ -1,9 +1,13 @@
-#!/usr/bin/env bash
+#!/usr/bin/env -S nu --stdin
 
-while IFS= read -r line; do
-    if echo "$line" | iconv -f UTF-8 -t UTF-8 > /dev/null 2>&1; then
-        echo "$line"
-    else
-        echo "$line" | iconv -f GBK -t UTF-8 2>/dev/null || echo "$line"
-    fi
-done | delta --paging=never --max-line-length 30000
+$in | into binary | bytes split 0x[0A] | each {
+  |line|
+  $line | ccat | str replace -a "\r" ""
+} | to text | delta --paging=never --max-line-length 30000
+
+def ccat [] {
+  match ($in | describe) {
+    "binary" => ($in | decode gbk)
+    _ => $in
+  }
+}
