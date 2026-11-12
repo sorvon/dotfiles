@@ -1,5 +1,7 @@
 git:
   diffRenderers:
+    - command: nu --stdin ~/.config/lazygit/delta_decode
+      colorArg: always
     - command: delta --paging=never --max-line-length 30000
       colorArg: always
 keybinding:
