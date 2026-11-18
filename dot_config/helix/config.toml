@@ -32,33 +32,25 @@ X = "select_line_above"
 # scooter
 s = [
     ':write-all',
-    ':pipe-to zellij run -i -c --blocking -- scooter',
-    ':reload-all',
+    ':sh $nu.temp-dir | path join helix_path | rm -f $in',
+    ":open %sh{ echo %sh{ zellij run -i -c --blocking -- scooter --editor-command `nu -c 'echo %%file o> ($nu.temp-dir | path join helix_path)'` }; $nu.temp-dir | path join helix_path | cat $in }",
 ]
 
 # lazygit
-g = [
-    ':write-all',
-    ':pipe-to zellij run -i -c --blocking -- lazygit',
-    ':reload-all',
-]
+g = [':write-all', ':sh let _ = zellij run -i -c --blocking -- lazygit']
 
 # yazi file
 y = [
     ':write-all',
-    ':sh $nu.temp-dir | path join yazi-path | rm -f $in',
-    ":pipe-to zellij run -i -c --blocking -- yazi %sh{ '%{buffer_name}' | path expand } --chooser-file %sh{ $nu.temp-dir | path join yazi-path }",
-    ':open %sh{ $nu.temp-dir | path join yazi-path | cat $in }',
-    ':reload-all',
+    ':sh $nu.temp-dir | path join helix_path | rm -f $in',
+    ":open %sh{ echo %sh{ zellij run -i -c --blocking -- yazi %sh{ '%{buffer_name}' | path expand } --chooser-file %sh{ $nu.temp-dir | path join helix_path } }; $nu.temp-dir | path join helix_path | cat $in }",
 ]
 
 # yazi pwd
 Y = [
     ':write-all',
-    ':sh $nu.temp-dir | path join yazi-path | rm -f $in',
-    ':pipe-to zellij run -i -c --blocking -- yazi %sh{ pwd } --chooser-file %sh{ $nu.temp-dir | path join yazi-path }',
-    ':open %sh{ $nu.temp-dir | path join yazi-path | cat $in }',
-    ':reload-all',
+    ':sh $nu.temp-dir | path join helix_path | rm -f $in',
+    ":open %sh{ echo %sh{ zellij run -i -c --blocking -- yazi %sh{ pwd } --chooser-file %sh{ $nu.temp-dir | path join helix_path } }; $nu.temp-dir | path join helix_path | cat $in }",
 ]
 
 [keys.normal."\\".u]
